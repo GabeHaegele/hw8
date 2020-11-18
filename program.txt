@@ -1,0 +1,138 @@
+#include <iostream>
+
+using namespace std;
+
+const int MAX = 17;
+
+class sea
+{
+  private:
+    char m_waters[MAX][MAX];
+    short m_sea_size;
+    void clear();
+    void populate();
+  public:
+    sea(const short grid_size=MAX, penguin[] pArr, const int pSize, fish[] fArr, const int fSize);
+    //overloaded insertion operator
+    //Getter/Setters
+    friend ostream & operator << (ostream &out, const sea &sea);
+};
+
+class penguin
+{
+  private:
+    int m_health;
+    int m_x;
+    int m_y;
+    bool m_alive;
+  public:
+    penguin();
+    void move();
+};
+
+class fish
+{
+  private:
+    int m_food;
+    int m_x;
+    int m_y;
+    bool m_alive;
+  public:
+    fish();
+    void move();
+};
+
+class killer_whale
+{
+  private:
+    int m_x;
+    int m_y;
+    int m_kills;
+  public:
+    killer_whale();
+    void move();
+};
+
+int main()
+{
+    cout << "Hello world!" << endl;
+
+    sea testWaters(10);
+
+    cout<<testWaters;
+
+
+
+    return 0;
+}
+
+void sea::clear()
+{
+  for(int i=0; i<m_sea_size; i++)
+  {
+    for(int j=0; j<m_sea_size; j++)
+    {
+      m_waters[i][j]='W';
+    }
+  }
+  return;
+}
+
+void sea::populate()
+{
+  for(int i=0; i<m_sea_size; i++)
+  {
+    for(int j=0; j<m_sea_size; j++)
+    {
+      m_waters[i][j]='W';
+    }
+  }
+  return;
+}
+
+sea::sea(const short grid_size=MAX, penguin[] pArr, const int pSize, fish[] fArr, const int fSize)
+{
+  m_sea_size=grid_size;
+  clear();
+}
+
+ostream & operator << (ostream &out, const sea &sea)
+{
+  out<<"  ";
+  for(int i=0; i<sea.m_sea_size; i++)
+  {
+    out<<i<<" ";//Top row of numbers
+  }
+  out<<endl;
+
+  for(int i=0; i<sea.m_sea_size; i++)
+  {
+    out<<i<<" ";//Left column of numbers
+    for(int j=0; j<sea.m_sea_size; j++)
+    {
+      out<<sea.m_waters[i][j]<<" ";
+    }
+    out<<endl;
+  }
+  return out;
+}
+
+//fish
+
+fish::fish()
+{
+  m_food=(rand()%10)+1;
+  m_x=-1;
+  m_y=-1;
+  m_alive=false;
+}
+
+//penguin
+
+penguin::penguin()
+{
+  m_health=(rand()%21)+60;
+  m_x=-1;
+  m_y=-1;
+  m_alive=false;
+}
